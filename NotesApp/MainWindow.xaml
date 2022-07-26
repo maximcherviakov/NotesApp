@@ -138,7 +138,7 @@
                                 <RowDefinition Height="20"/>
                                 <RowDefinition MinHeight="60" MaxHeight="80"/>
                             </Grid.RowDefinitions>
-
+                            
                             <Grid Background="Orange" Grid.Row="0"/>
                             <TextBlock HorizontalAlignment="Right"
                                    VerticalAlignment="Center"
@@ -154,12 +154,6 @@
                                        Grid.Row="2">
                                 text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text
                             </TextBlock>
-
-
-
-
-
-
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
