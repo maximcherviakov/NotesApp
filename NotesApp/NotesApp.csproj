@@ -10,18 +10,26 @@
   <ItemGroup>
     <None Remove="black-close.png" />
     <None Remove="black-create.png" />
+    <None Remove="NotesApp.ico" />
     <None Remove="res\black-close.png" />
     <None Remove="res\black-create.png" />
     <None Remove="res\black-search.png" />
     <None Remove="res\black-settings.png" />
+    <None Remove="res\images\black\black-bullets.png" />
+    <None Remove="res\images\black\black-trash.png" />
     <None Remove="res\images\light\white-close.png" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="4.5.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="NotesApp.ico" />
+    <Resource Include="res\images\black\black-bullets.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="res\images\black\black-close.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -32,6 +40,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="res\images\black\black-settings.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\images\black\black-trash.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="res\images\light\white-close.png">

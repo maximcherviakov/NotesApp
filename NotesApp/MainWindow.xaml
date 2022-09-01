@@ -7,12 +7,18 @@
         xmlns:local="clr-namespace:NotesApp"
         WindowStyle="None"
         mc:Ignorable="d"
-        Title="Notes" Height="600" Width="300" MinHeight="600" MinWidth="300">
+        Title="Notes" Height="600" Width="300" MinHeight="600" MinWidth="300" MouseDown="Window_MouseDown" Icon="/NotesApp.ico">
 
     <Window.Resources>
         <Image x:Key="black-close" Source="res/images/black/black-close.png" Stretch="None"/>
         <Image x:Key="white-close" Source="res/images/light/white-close.png" Stretch="None"/>
+
+        <Style x:Key="itemstyle" TargetType="{x:Type ListViewItem}">
+            <EventSetter Event="MouseDoubleClick" Handler="ListItemDoubleClick" />
+        </Style>
     </Window.Resources>
+
+
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -40,7 +46,7 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     materialDesign:ButtonAssist.CornerRadius="0"
-                    materialDesign:ShadowAssist.ShadowDepth="Depth0">
+                    materialDesign:ShadowAssist.ShadowDepth="Depth0" Click="CreateNewNoteButton_Click">
                 <Image Source="res/images/black/black-create.png" Stretch="None"/>
             </Button>
             <Button Name="SettingsButton" Width="40" Height="40"
@@ -51,8 +57,8 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     materialDesign:ButtonAssist.CornerRadius="0"
-                    materialDesign:ShadowAssist.ShadowDepth="Depth0">
-                <Image Source="res/images/black/black-settings.png" Stretch="None"/>
+                    materialDesign:ShadowAssist.ShadowDepth="Depth0" Click="SettingsButton_Click">
+                <Label Content="-" FontSize="24" FontFamily="Trebuchet MS" FontWeight="Bold" FontStretch="Normal" FontStyle="Normal" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Button>
             <Button Name="CloseButton" Width="40" Height="40"
                     Padding="0"
@@ -104,7 +110,9 @@
                 <ColumnDefinition Width="34"/>
             </Grid.ColumnDefinitions>
 
-            <TextBox BorderThickness="0" Padding="10,4,0,4" Grid.Column="0"
+            <TextBox Name="searchTextBox" BorderThickness="0" 
+                     Padding="10,4,0,4" 
+                     Grid.Column="0"
                      Background="Transparent"
                      FontSize="14"
                      materialDesign:HintAssist.FloatingScale="0.6"
@@ -116,17 +124,19 @@
                     Background="Transparent"
                     BorderThickness="0"
                     Grid.Column="1"
-                    materialDesign:ShadowAssist.ShadowDepth="Depth0">
+                    materialDesign:ShadowAssist.ShadowDepth="Depth0" Click="SearchButton_Click">
                 <Image Source="res/images/black/black-search.png" Stretch="None"/>
             </Button>
         </Grid>
 
         <Grid Grid.Row="3">
-            <ListView HorizontalContentAlignment="Stretch"
+            <ListView x:Name="notesList"
+                      HorizontalContentAlignment="Stretch"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       Style="{DynamicResource MaterialDesignListView}"
-                      ScrollViewer.CanContentScroll="False">
-
+                      ScrollViewer.CanContentScroll="False"
+                      ItemContainerStyle="{StaticResource itemstyle}"
+                      ItemsSource="{Binding notesList}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -136,35 +146,25 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="4"/>
                                 <RowDefinition Height="20"/>
-                                <RowDefinition MinHeight="60" MaxHeight="80"/>
+                                <RowDefinition MinHeight="40" MaxHeight="84"/>
                             </Grid.RowDefinitions>
-                            
-                            <Grid Background="Orange" Grid.Row="0"/>
+
+                            <Grid Background="{Binding Color}" Grid.Row="0"/>
                             <TextBlock HorizontalAlignment="Right"
-                                   VerticalAlignment="Center"
-                                   Margin="0,4,4,0"
-                                   Grid.Row="1">
-                            14:00
-                            </TextBlock>
+                                       VerticalAlignment="Center"
+                                       Margin="0,4,4,0"
+                                       Grid.Row="1"
+                                       Text="{Binding Path=Time}"/>
                             <TextBlock TextTrimming="CharacterEllipsis"
                                        TextWrapping="Wrap"
                                        Margin="4"
-                                       MinHeight="60"
+                                       MinHeight="40"
                                        MaxHeight="80"
-                                       Grid.Row="2">
-                                text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text
-                            </TextBlock>
+                                       Grid.Row="2"
+                                       Text="{Binding Path=PreviewText}"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-
-                <ListBoxItem/>
-                <ListBoxItem/>
-                <ListBoxItem/>
-                <ListBoxItem/>
-                <ListBoxItem/>
-                <ListBoxItem/>
-
             </ListView>
         </Grid>
     </Grid>
